@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<title>CMPT 361 HW1 - Enter your name and surname</title>
+
+</head> <body>
+
+<h2>CMPT 361 - Homework 1</h2>
+
+<p>Name: <b>Rongsheng Qian</b></p>
+<p>Student No: <b>301449387</b></p>
+<p>Date: Jan 27 2023</p>
+
+<h4>Honor statement:</h4>
+<p>I have not cheated in any way when doing this assignment, I did it on my own. I may have asked questions about the assignment on Piazza, I know that’s totally fine and even encouraged. I also already know that this class is graded on a curve. I realize that if I cheat and by some miracle not get caught, any increase in my grade will in turn shift the curve and result in lower grades for my classmates. Any undeserved extra grade would come at the cost of all others. That’s horrible! I would never do it.</p>
+
+<h4>1: Take two photographs</h4>
+<img src="./Result_png/HP.png" alt="HP" width="300" height="300">
+<img src="./Result_png/LP.png" alt="LP" width="300" height="300">
+
+
+<h4>2: Compute frequency representations</h4>
+<img src="./Result_png/HP-freq.png" alt="HP-freq" width="300" height="300">
+<img src="./Result_png/LP-freq.png" alt="LP-freq" width="300" height="300">
+
+<h4>3: Visualize kernels</h4>
+<img src="./Result_png/gaus-surf.png" alt="gaus-surf" width="300" height="300">
+<img src="./Result_png/dog-surf.png" alt="dog-surf" width="300" height="300">
+<br><br>
+<img src="./Result_png/HP-filt.png" alt="HP-filt" width="300" height="300">
+<img src="./Result_png/HP-filt-freq.png" alt="HP-filt-freq" width="300" height="300">
+<br><br>
+<img src="./Result_png/LP-filt.png" alt="LP-filt" width="300" height="300">
+<img src="./Result_png/LP-filt-freq.png" alt="LP-filt-freq" width="300" height="300">
+<br><br>
+<img src="./Result_png/HP-dogfilt.png" alt="HP-dogfilt" width="300" height="300">
+<img src="./Result_png/HP-dogfilt-freq.png" alt="HP-dogfilt-freq" width="300" height="300">
+<br><br>
+<img src="./Result_png/LP-dogfilt.png" alt="LP-dogfilt" width="300" height="300">
+<img src="./Result_png/LP-dogfilt-freq.png" alt="LP-dogfilt-freq" width="300" height="300">
+
+<h4>4: Anti-aliasing</h4>
+<img src="./Result_png/HP-sub2.png" alt="HP-sub2" width="300" height="300">
+<img src="./Result_png/HP-sub2-freq.png" alt="HP-sub2-freq" width="300" height="300">
+<br><br>
+<img src="./Result_png/LP-sub2.png" alt="LP-sub2" width="300" height="300">
+<img src="./Result_png/LP-sub2-freq.png" alt="LP-sub2-freq" width="300" height="300">
+<p>The high frequency in frequency domain are corrupted, which is collided with each other. The intuitive reflection is that there is severe fog around it. In spacial domain, we can see some small aliasing in the vertical railings.</p>
+
+<img src="./Result_png/HP-sub4.png" alt="HP-sub4" width="300" height="300">
+<img src="./Result_png/HP-sub4-freq.png" alt="HP-sub4-freq" width="300" height="300">
+<br><br>
+<img src="./Result_png/LP-sub4.png" alt="LP-sub4" width="300" height="300">
+<img src="./Result_png/LP-sub4-freq.png" alt="LP-sub4-freq" width="300" height="300">
+<p>The high frequency in frequency domain are corrupted, which is collided with each other. The intuitive reflection is that there is severe fog around it. In spacial domain, we can see some small aliasing in the vertical railings. Comparing to the half version, the phenomenon has been worse.</p>
+
+<img src="./Result_png/HP-sub2-aa.png" alt="HP-sub2-aa" width="300" height="300">
+<img src="./Result_png/HP-sub2-aa-freq.png" alt="HP-sub2-aa-freq" width="300" height="300">
+<br><br>
+<img src="./Result_png/HP-sub4-aa.png" alt="HP-sub4-aa" width="300" height="300">
+<img src="./Result_png/HP-sub4-aa-freq.png" alt="HP-sub4-aa-freq" width="300" height="300">
+<p>Both standard deviations of the two Gaussian filters are 1.50. Gaussian filter's size of half version is 5 and other Gaussian filter's size of quarter version is 30. By discarding a part of the high frequency part, most of the other frequency part is preserved.
+    The less size of Gaussian filter, the more frequency part is preserved. In spatial domain, the aliasing is diappeared.  
+    In frequency domain, some high frequency which isn't corrupted slightly is kept/repaired. Others which is corrupted seriously is abanded.
+    The intuitive reflection is the most of the clous is removed.
+</p>
+
+<h4>5: Canny edge detection thresholding</h4>
+
+<img src="./Result_png/HP-canny-optimal.png" alt="HP-canny-optimal" width="500" height="500">
+<br><br>
+<img src=" ./Result_png/HP-canny-lowlow.png" alt=" HP-canny-lowlow" width="300" height="300">
+<img src="./Result_png/HP-canny-highlow.png" alt=" HP-canny-highlow" width="300" height="300">
+<br><br>
+<img src=" ./Result_png/HP-canny-lowhigh.png" alt=" HP-canny-lowhigh" width="300" height="300">
+<img src=" ./Result_png/HP-canny-highhigh.png" alt=" HP-canny-highhigh" width="300" height="300">
+<p>I set optimal parameters of threshold as [0.04,0.08] for HP
+    Set lowlow as [0.02,0.08], which can cause more noise weak edge between the railing and around the lights(show in picture 1);
+    Set highlow as [0.07,0.08], which will ignore one of the edges of the top decoration.(show in picture 2);
+    Set lowhigh as [0.04,0.06], which can cause more noise weak edge(show in picture 3);
+    Set highlow as [0.04,0.1], which will ignore the edges of the the top railing.(show in picture 4);
+    My optimal edges are still not perfect, edges around the lights should have been excluded and edges on the top decoration shuold have been included by a better edge detection method.
+</p>
+
+<img src="./Result_png/LP-canny-optimal.png" alt="LP-canny-optimal" width="500" height="500">
+<br><br>
+<img src=" ./Result_png/LP-canny-lowlow.png" alt=" LP-canny-lowlow" width="300" height="300">
+<img src=" ./Result_png/LP-canny-highlow.png" alt=" LP-canny-highlow" width="300" height="300">
+<br><br>
+<img src=" ./Result_png/LP-canny-lowhigh.png" alt=" LP-canny-lowhigh" width="300" height="300">
+<img src=" ./Result_png/LP-canny-highhigh.png" alt=" LP-canny-highhigh" width="300" height="300">
+<p>I set optimal parameters of threshold as [0.1,0.16] for LP.
+    Set lowlow as [0.05,0.16], which can cause more noise weak edge(show in picture 1);
+    Set highlow as [0.12,0.16], which will ignore one of the edges of the road.(show in picture 2);
+    Set lowhigh as [0.1,0.14], which can cause more noise weak edge(show in picture 3);
+    Set highlow as [0.12,0.18], which will ignore one of the edges of the road.(show in picture 4);
+    My optimal edges are still not perfect, edges of tree should have been excluded by a better edge detection method.
+</p>
+
+
+</body> </html>
