@@ -3,10 +3,16 @@
 
 using namespace cv;
 
-Mat DoG(Mat src, int size, double sigma1, double sigma2);
+enum Color{
+    Grey = 1,
+    Other = 0,
 
-Mat LoG(Mat src, int size, double sigma);
+};
 
-Mat FindEdges(Mat src, int size, double sigma);
+Mat DoG(Mat src, int size, double sigma1, double sigma2,int CFormat = Other);
 
-Mat LaplacianKernel(Mat src);
+Mat LoG(Mat src, int size, double sigma,int CFormat = Other);
+
+Mat FindEdges(Mat src, int size, double sigma,int CFormat = Other);
+
+Mat LaplacianKernel(Mat src,int CFormat = Other);

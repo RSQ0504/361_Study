@@ -38,8 +38,8 @@ int main(){
     */
 
     Mat image;
-    image = imread("./Picture/HsBoy.png",IMREAD_GRAYSCALE);
-    image = DoG(image,5,0,1);
+    image = imread("./Picture/HsBoy.png");
+    image = DoG(image,5,0,1,Grey);
     image = image * 100;
     imshow("Display Image", image);
     waitKey(0);
