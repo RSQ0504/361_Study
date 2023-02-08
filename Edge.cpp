@@ -37,7 +37,7 @@ Mat FindEdges(Mat src, int size, double sigma) {
 Mat LaplacianKernel(Mat src){
     Mat result;
     float filter[3][3] = { { 0, -1, 0 },
-                            { 0,  8, 0 },
+                            { -1,  4, -1 },
                             { 0, -1, 0 } };
     Mat kernel = Mat(3, 3, CV_32F, filter);
     filter2D(src, result, -1, kernel);
