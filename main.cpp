@@ -38,8 +38,9 @@ int main(){
     */
 
     Mat image;
-    image = imread("./Picture/GF.png",IMREAD_GRAYSCALE);
-    image = FindEdges(image,5,1);
+    image = imread("./Picture/HsBoy.png",IMREAD_GRAYSCALE);
+    image = DoG(image,5,0,1);
+    image = image * 100;
     imshow("Display Image", image);
     waitKey(0);
     return 0;
