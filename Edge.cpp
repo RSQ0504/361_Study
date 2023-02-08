@@ -5,6 +5,8 @@
 using namespace std;
 
 Mat DoG(Mat src, int size, double sigma1, double sigma2) {
+    if (src.channels()!=1)
+        cvtColor(src, src, COLOR_BGR2GRAY);
     Mat Gaussian1, Gaussian2;
     GaussianBlur(src, Gaussian1, Size(size, size), sigma1);
     GaussianBlur(src, Gaussian2, Size(size, size), sigma2);
@@ -13,6 +15,8 @@ Mat DoG(Mat src, int size, double sigma1, double sigma2) {
 }
 
 Mat LoG(Mat src, int size, double sigma) {
+    if (src.channels()!=1)
+        cvtColor(src, src, COLOR_BGR2GRAY);
     Mat Gaussian;
     GaussianBlur(src, Gaussian, Size(size, size), sigma);
     Mat result;
@@ -22,6 +26,8 @@ Mat LoG(Mat src, int size, double sigma) {
 }
 
 Mat FindEdges(Mat src, int size, double sigma) {
+    if (src.channels()!=1)
+        cvtColor(src, src, COLOR_BGR2GRAY);
     Mat Gaussian;
     GaussianBlur(src, Gaussian, Size(size, size), sigma);
     Mat ix, iy;
@@ -36,6 +42,8 @@ Mat FindEdges(Mat src, int size, double sigma) {
 
 Mat LaplacianKernel(Mat src){
     Mat result;
+    if (src.channels()!=1)
+        cvtColor(src, src, COLOR_BGR2GRAY);
     float filter[3][3] = { { 0, -1, 0 },
                             { -1,  4, -1 },
                             { 0, -1, 0 } };
