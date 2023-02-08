@@ -23,13 +23,13 @@ void matchSiftFeatures(const Mat& image1, const Mat& image2,
     matcher.match(descriptors1, descriptors2, matches);
 }
 
-void detectHarrisCorners(const Mat& image, std::vector<Point2f>& corners)
+void detectHarrisCorners(const Mat& image, std::vector<Point2f>& corners,double t)
 {
     Mat cornerStrength;
     cornerHarris(image, cornerStrength, 2, 3, 0.04);
 
     Mat harrisCorners;
-    threshold(cornerStrength, harrisCorners, 0.00001, 255, THRESH_BINARY);
+    threshold(cornerStrength, harrisCorners, t, 255, THRESH_BINARY);
 
     for (int y = 0; y < harrisCorners.rows; y++)
     {
