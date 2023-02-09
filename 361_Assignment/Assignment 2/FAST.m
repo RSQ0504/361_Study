@@ -1,4 +1,4 @@
-image = imread("IMG_4775.png");
+image = imread("IMG_4776.png");
 targetSize = [1500 1500];
 r = centerCropWindow2d(size(image),targetSize);
 image = imcrop(image,r);
@@ -102,5 +102,5 @@ for i = 1:size(check_step2,1)
 end
 FAST_step3 = check_step3 .* image;
 
-imshow([FAST_step2 FAST_step3]);
+imshow([check_step2 check_step3]);
 
