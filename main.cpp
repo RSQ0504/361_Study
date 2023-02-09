@@ -26,27 +26,33 @@ int main(){
     imshow("Display Image", alpha);
     */
 
-/*
-    Mat image1,image2,descriptors1,descriptors2;
+
+    Mat image1,image2;
     std::vector<KeyPoint> keypoints1,keypoints2;
     std::vector<DMatch> match;
 
-    image1 = imread("./Picture/GF.png",IMREAD_GRAYSCALE);
+    image1 = imread("./Picture/HsBoy.png",IMREAD_GRAYSCALE);
     image2 =image1;
 
-    matchSiftFeatures(image1,image2,keypoints1,keypoints2,descriptors1,descriptors2,match);
+    matchSiftFeatures(image1,image2,keypoints1,keypoints2,match);
 
     Mat output;
     drawMatches(image1,keypoints1,image2,keypoints2,match,output);
     imshow("SIFT keypoints", output);
-*/
-    
+
+    /*
     Mat image;
     image = imread("./Picture/HsBoy.png");
     image = DoG(image,5,0,1,Grey);
     image = image * 100;
     imshow("Display Image", image);
-    
+    */
+   /*
+    Mat image,out1,out2;
+    out1 = imread("./Picture/HsBoy.png");
+    image=HarrisCornerDetector(out1,out2,30,100);
+    imshow("Display Image", out2);
+    */
     waitKey(0);
     return 0;
 }

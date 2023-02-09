@@ -9,9 +9,8 @@ using namespace std;
  * 
  * @param image 
  * @param keypoints 
- * @param descriptors 
  */
-void createSIFT(Mat image,vector<KeyPoint> &keypoints, Mat descriptors);
+void createSIFT(Mat image,vector<KeyPoint> &keypoints);
 /**
  * @brief 
  * 
@@ -19,13 +18,10 @@ void createSIFT(Mat image,vector<KeyPoint> &keypoints, Mat descriptors);
  * @param image2 
  * @param keypoints1 
  * @param keypoints2 
- * @param descriptors1 
- * @param descriptors2 
  * @param matches 
  */
 void matchSiftFeatures(Mat image1, Mat image2,
                         vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2,
-                        Mat descriptors1, Mat descriptors2, vector<DMatch> &matches);
+                        vector<DMatch> &matches);
 
-//TODO:
-    //void detectHarrisCorners(Mat image, vector<Point2f> corners,double t);
+Mat HarrisCornerDetector(Mat image,Mat &out,int size, int threshold);

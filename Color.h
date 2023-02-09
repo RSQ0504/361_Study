@@ -5,29 +5,29 @@ using namespace cv;
 /**
  * @brief 
  * 
- * @param original 
+ * @param src 
  * @return Mat 
  */
-Mat image2hsv(Mat original);
+Mat image2hsv(Mat src);
 /**
  * @brief 
  * 
- * @param original 
+ * @param src 
  * @return Mat 
  */
-Mat image2double_3C(Mat original);
+Mat image2double_3C(Mat src);
 /**
  * @brief 
  * 
- * @param original 
+ * @param src 
  * @param color 
  * @return Mat 
  */
-Mat showchannel_3C(Mat original,int color);
+Mat showchannel_3C(Mat src,int color);
 /**
  * @brief 
  * 
- * @param original 
+ * @param src 
  * @return Mat 
  */
-Mat getalpha(Mat original);
+Mat getalpha(Mat src);
