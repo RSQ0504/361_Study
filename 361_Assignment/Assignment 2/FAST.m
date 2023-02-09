@@ -1,6 +1,10 @@
-image = imread("IMG_4760.png");
+image = imread("IMG_4775.png");
+targetSize = [1500 1500];
+r = centerCropWindow2d(size(image),targetSize);
+image = imcrop(image,r);
+image =imresize(image,[750,750]);
 
-threshold = 0.3;
+threshold = 0.05;
 
 ml3 = zeros(7);
 ml3(4,1) = 1;
@@ -60,11 +64,11 @@ for i = 1:16
     image_shift(i,:,:) = imfilter(image,result);
 end
 
-
+%---------------------------------------------------------------
 check_step1 = (~(abs(image_1 - image)<=threshold & abs(image_9 - image)<=threshold));
 
 FAST_step1 = check_step1 .* image;
-
+%---------------------------------------------------------------
 step2 = (abs(image_1 - FAST_step1)>threshold & image_1 > FAST_step1);% brighter
 step2 = step2 - (abs(image_1 - FAST_step1)>threshold & image_1 < FAST_step1);%darker
 step2 = step2+ (abs(image_5 - FAST_step1)>threshold & image_5 > FAST_step1);% brighter
@@ -80,18 +84,23 @@ check_step2 = (abs(step2)>=2);
 
 FAST_step2 = check_step2 .* image;
 
-result = reshape(image_shift(1,:,:), size(image_shift,2), size(image_shift,3));
-step3 = (abs(result - FAST_step2)>threshold & result > FAST_step2);% brighter
-step3 = step3 - (abs(result - FAST_step2)>threshold & result < FAST_step2);%darker
-
-for i = 2:16
-    result = reshape(image_shift(i,:,:), size(image_shift,2), size(image_shift,3));
-    step3 = step3 + (abs(result - FAST_step2)>threshold & result > FAST_step2);% brighter
-    step3 = step3 - (abs(result - FAST_step2)>threshold & result < FAST_step2);%darker
+%---------------------------------------------------------------
+compare=zeros(1,16);
+check_step3 = check_step2;
+for i = 1:size(check_step2,1)
+    for j = 1:size(check_step2,2)
+        if(check_step2(i,j)==1)
+            for k=1:16
+                compare(k) = image_shift(k,i,j) - FAST_step2(i,j);
+                count = findLen(compare,threshold);
+                if(count<12)
+                    check_step3(i,j)=0;
+                end
+            end
+        end
+    end
 end
-step3 = step3 .* check_step2;
-check_step3 = (abs(step3)>=14);
-FAST_step3 = check_step3 .*image;
+FAST_step3 = check_step3 .* image;
 
-imshow([FAST_step1 FAST_step2 FAST_step3]);
+imshow([FAST_step2 FAST_step3]);
 
