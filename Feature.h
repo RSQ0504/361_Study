@@ -2,6 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/xfeatures2d.hpp>
 using namespace cv;
+using namespace std;
 
 /**
  * @brief 
@@ -10,7 +11,7 @@ using namespace cv;
  * @param keypoints 
  * @param descriptors 
  */
-void createSIFT(const Mat& image, std::vector<KeyPoint>& keypoints, Mat& descriptors);
+void createSIFT(Mat image,vector<KeyPoint> &keypoints, Mat descriptors);
 /**
  * @brief 
  * 
@@ -22,14 +23,9 @@ void createSIFT(const Mat& image, std::vector<KeyPoint>& keypoints, Mat& descrip
  * @param descriptors2 
  * @param matches 
  */
-void matchSiftFeatures(const Mat& image1, const Mat& image2,
-                        std::vector<KeyPoint>& keypoints1,std::vector<KeyPoint>& keypoints2,
-                        Mat& descriptors1, Mat& descriptors2, std::vector<DMatch>& matches);
-/**
- * @brief 
- * 
- * @param image 
- * @param corners 
- * @param t 
- */
-void detectHarrisCorners(const Mat& image, std::vector<Point2f>& corners,double t);
+void matchSiftFeatures(Mat image1, Mat image2,
+                        vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2,
+                        Mat descriptors1, Mat descriptors2, vector<DMatch> &matches);
+
+//TODO:
+    //void detectHarrisCorners(Mat image, vector<Point2f> corners,double t);

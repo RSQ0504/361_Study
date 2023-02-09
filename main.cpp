@@ -26,22 +26,27 @@ int main(){
     imshow("Display Image", alpha);
     */
 
-    /*
-    Mat image, descriptors;
-    std::vector<KeyPoint> keypoints;
-    image = imread("./Picture/GF.png",IMREAD_GRAYSCALE);
-    createSIFT(image,keypoints,descriptors);
+/*
+    Mat image1,image2,descriptors1,descriptors2;
+    std::vector<KeyPoint> keypoints1,keypoints2;
+    std::vector<DMatch> match;
+
+    image1 = imread("./Picture/GF.png",IMREAD_GRAYSCALE);
+    image2 =image1;
+
+    matchSiftFeatures(image1,image2,keypoints1,keypoints2,descriptors1,descriptors2,match);
 
     Mat output;
-    drawKeypoints(image, keypoints, output);
+    drawMatches(image1,keypoints1,image2,keypoints2,match,output);
     imshow("SIFT keypoints", output);
-    */
-
+*/
+    
     Mat image;
     image = imread("./Picture/HsBoy.png");
     image = DoG(image,5,0,1,Grey);
     image = image * 100;
     imshow("Display Image", image);
+    
     waitKey(0);
     return 0;
 }
