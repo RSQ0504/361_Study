@@ -63,18 +63,31 @@ function mat = my_fast_detector(image,threshold)
     
     FAST_step1 = check_step1 .* image;
     %---------------------------------------------------------------
-    step2 = (abs(image_1 - FAST_step1)>threshold & image_1 > FAST_step1);% brighter
-    step2 = step2 - (abs(image_1 - FAST_step1)>threshold & image_1 < FAST_step1);%darker
-    step2 = step2+ (abs(image_5 - FAST_step1)>threshold & image_5 > FAST_step1);% brighter
-    step2 = step2 - (abs(image_5 - FAST_step1)>threshold & image_5 < FAST_step1);%darker
-    step2 = step2+ (abs(image_9 - FAST_step1)>threshold & image_9 > FAST_step1);% brighter
-    step2 = step2 - (abs(image_9 - FAST_step1)>threshold & image_9 < FAST_step1);%darker
-    step2 = step2+ (abs(image_13 - FAST_step1)>threshold & image_13 > FAST_step1);% brighter
-    step2 = step2 - (abs(image_13 - FAST_step1)>threshold & image_13 < FAST_step1);%darker
+    step2a = (abs(image_1 - FAST_step1)>threshold & image_1 > FAST_step1);% brighter
+    step2a = step2a - (abs(image_1 - FAST_step1)>threshold & image_1 < FAST_step1);%darker
+    step2a = step2a + (abs(image_5 - FAST_step1)>threshold & image_5 > FAST_step1);% brighter
+    step2a = step2a - (abs(image_5 - FAST_step1)>threshold & image_5 < FAST_step1);%darker
+    step2a = step2a + (abs(image_9 - FAST_step1)>threshold & image_9 > FAST_step1);% brighter
+    step2a = step2a - (abs(image_9 - FAST_step1)>threshold & image_9 < FAST_step1);%darker
+    step2a = step2a+ (abs(image_13 - FAST_step1)>threshold & image_13 > FAST_step1);% brighter
+    step2a = step2a - (abs(image_13 - FAST_step1)>threshold & image_13 < FAST_step1);%darker
+
+    step2b = (abs(image_1 - FAST_step1)>threshold & image_1 > FAST_step1);% brighter
+    step2b = step2b + (abs(image_1 - FAST_step1)>threshold & image_1 < FAST_step1);%darker
+    step2b = step2b + (abs(image_5 - FAST_step1)>threshold & image_5 > FAST_step1);% brighter
+    step2b = step2b + (abs(image_5 - FAST_step1)>threshold & image_5 < FAST_step1);%darker
+    step2b = step2b + (abs(image_9 - FAST_step1)>threshold & image_9 > FAST_step1);% brighter
+    step2b = step2b + (abs(image_9 - FAST_step1)>threshold & image_9 < FAST_step1);%darker
+    step2b = step2b + (abs(image_13 - FAST_step1)>threshold & image_13 > FAST_step1);% brighter
+    step2b = step2b + (abs(image_13 - FAST_step1)>threshold & image_13 < FAST_step1);%darker
     
-    step2 = step2 .* check_step1;
+    step2a = step2a .* check_step1;
+    step2b = step2b .* check_step1;
     
-    check_step2 = (abs(step2)>=2);
+    checkpoint2a = (abs(step2a)>=2);
+    checkpoint2b = (abs(step2b)>=3);
+    
+    check_step2 = checkpoint2a .* checkpoint2b;
     
     FAST_step2 = check_step2 .* image;
     
