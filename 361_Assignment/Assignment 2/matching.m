@@ -5,8 +5,8 @@ function [features1,validPoints1] = matching(image,keypoint)
     for i = 1:size(keypoint,1)
         for j = 1:size(keypoint,2)
             if (keypoint(i,j)==1)
-                x=[x i];
-                y=[y,j];
+                x=[x j];
+                y=[y i];
             end
         end
     end
