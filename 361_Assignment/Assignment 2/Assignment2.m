@@ -7,7 +7,6 @@ image1 = imcrop(image1,r);
 image1 =imresize(image1,[750,750]);
 Fast1 = my_fast_detector(image1,0.05);
 Faster1 = Harris(image1,Fast1);
-%imshow([Fast1 Faster1]);
 
 
 image2 = imread("1.JPG");
@@ -19,8 +18,8 @@ image2 = imcrop(image2,r);
 image2 =imresize(image2,[750,750]);
 Fast2 = my_fast_detector(image2,0.05);
 Faster2 = Harris(image2,Fast2);
-%figure
-%imshow([Fast2 Faster2]);
+
+imshow([Fast1 Faster1; Fast2 Faster2]);
 
 
 [features1,validPoints1] = matching(image1,Fast1);
