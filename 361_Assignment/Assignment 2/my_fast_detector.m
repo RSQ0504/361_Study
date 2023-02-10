@@ -1,8 +1,4 @@
 function mat = my_fast_detector(image,threshold)
-    targetSize = [1500 1500];
-    r = centerCropWindow2d(size(image),targetSize);
-    image = imcrop(image,r);
-    image =imresize(image,[750,750]);
     
     ml3 = zeros(7);
     ml3(4,1) = 1;
@@ -13,8 +9,8 @@ function mat = my_fast_detector(image,threshold)
     mr3 = zeros(7);
     mr3(4,7) = 1;
     
-    image = rgb2gray(image);
-    image =im2double(image);
+    %image = rgb2gray(image);
+    %image =im2double(image);
     
     image_1 = imfilter(image,mu3);
     image_9 = imfilter(image,md3);
