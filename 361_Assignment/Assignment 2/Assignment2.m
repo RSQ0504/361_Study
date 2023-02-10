@@ -39,6 +39,7 @@ matchedPoints2 = validPoints2(indexPairs(:, 2), :);
 figure;
 showMatchedFeatures(image1, image2, matchedPoints1, matchedPoints2,'montage');
 
+[tform,inlierIdx] = estgeotform2d(matchedPoints1, matchedPoints2,'projective', 'confidence', 99.9, 'MaxNumTrials', 2000);
 
 
 
