@@ -29,7 +29,7 @@ indexPairs = matchFeatures(features1, features2);
 matchedPoints1 = validPoints1(indexPairs(:, 1), :);
 matchedPoints2 = validPoints2(indexPairs(:, 2), :);
 figure;
-showMatchedFeatures(image1, image2, matchedPoints1, matchedPoints2);
+showMatchedFeatures(image1, image2, matchedPoints1, matchedPoints2,'montage');
 
 
 [features1,validPoints1] = matching(image1,Faster1);
@@ -38,6 +38,6 @@ indexPairs = matchFeatures(features1, features2);
 matchedPoints1 = validPoints1(indexPairs(:, 1), :);
 matchedPoints2 = validPoints2(indexPairs(:, 2), :);
 figure;
-showMatchedFeatures(image1, image2, matchedPoints1, matchedPoints2);
+showMatchedFeatures(image1, image2, matchedPoints1, matchedPoints2,'montage');
 
 
