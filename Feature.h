@@ -16,7 +16,7 @@ void createSIFT(Mat image,vector<KeyPoint> &keypoints);
  * 
  * @param image 
  * @param keypoints 
- * @param threshold 
+ * @param threshold value of thrshold which is used to delete the weak feature.
  */
 void createSIFT(Mat image,vector<KeyPoint> &keypoints,double threshold);
 /**
@@ -39,7 +39,7 @@ void matchSiftFeatures(Mat image1, Mat image2,
  * @param keypoints1 
  * @param keypoints2 
  * @param matches 
- * @param threshold 
+ * @param threshold value of thrshold which is used to delete the weak feature.
  */
 void matchSiftFeatures(Mat image1, Mat image2,
                         vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2,
@@ -49,7 +49,7 @@ void matchSiftFeatures(Mat image1, Mat image2,
  * 
  * @param image 
  * @param out 
- * @param size 
+ * @param size neighbourhood size
  * @param threshold 
  * @return Mat 
  */
