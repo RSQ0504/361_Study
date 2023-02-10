@@ -12,6 +12,19 @@ void createSIFT(Mat image, vector<KeyPoint> &keypoints)
     s->detectAndCompute(image, noArray(), keypoints, descriptors);
 }
 
+void createSIFTDeleteWeak(Mat image,vector<KeyPoint> &keypoints,double threshold){
+    Ptr<SIFT> s = SIFT::create();
+    vector<KeyPoint> tempt;
+    s->detect(image, tempt);
+    for (int i = 0; i < tempt.size(); i++) {
+        KeyPoint k = tempt[i];
+        if (k.response > threshold) {
+            keypoints.push_back(k);
+        }
+    }
+}
+
+
 void matchSiftFeatures(Mat image1, Mat image2,
                         vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2,
                         vector<DMatch> &matches)
@@ -21,6 +34,37 @@ void matchSiftFeatures(Mat image1, Mat image2,
 
     s->detectAndCompute(image1, noArray(), keypoints1, descriptors1);
     s->detectAndCompute(image2, noArray(), keypoints2, descriptors2);
+
+    BFMatcher match(NORM_L2);
+    match.match(descriptors1, descriptors2, matches);
+}
+
+void matchSiftFeaturesDeleteWeak(Mat image1, Mat image2,
+                        vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2,
+                        vector<DMatch> &matches,double threshold)
+{
+    Ptr<Feature2D> s = SIFT::create();
+    Mat descriptors1,descriptors2;
+    vector<KeyPoint> tempt1,tempt2;
+
+    s->detect(image1, tempt1);
+    s->detect(image2,tempt2);
+
+    for (int i = 0; i < tempt1.size(); i++) {
+        KeyPoint k = tempt1[i];
+        if (k.response > threshold) {
+            keypoints1.push_back(k);
+        }
+    }
+    for (int i = 0; i < tempt2.size(); i++) {
+        KeyPoint k = tempt2[i];
+        if (k.response > threshold) {
+            keypoints2.push_back(k);
+        }
+    }
+
+    s->compute(image1,keypoints1,descriptors1);
+    s->compute(image2,keypoints2,descriptors2);
 
     BFMatcher match(NORM_L2);
     match.match(descriptors1, descriptors2, matches);

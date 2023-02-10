@@ -31,10 +31,10 @@ int main(){
     std::vector<KeyPoint> keypoints1,keypoints2;
     std::vector<DMatch> match;
 
-    image1 = imread("./Picture/HsBoy.png",IMREAD_GRAYSCALE);
-    image2 =image1;
+    image1 = imread("./Picture/1.png",IMREAD_GRAYSCALE);
+    image2 = imread("./Picture/2.png",IMREAD_GRAYSCALE);
 
-    matchSiftFeatures(image1,image2,keypoints1,keypoints2,match);
+    matchSiftFeaturesDeleteWeak(image1,image2,keypoints1,keypoints2,match,0.1);
 
     Mat output;
     drawMatches(image1,keypoints1,image2,keypoints2,match,output);
