@@ -25,34 +25,34 @@ Faster2 = Harris(image2,Fast2);
 imshow([Fast1 Faster1; Fast2 Faster2]);
 
 
-[features1,validPoints1] = matching(image1,Fast1);
-[features2,validPoints2] = matching(image2,Fast2);
-indexPairs = matchFeatures(features1, features2);
-matchedPoints1 = validPoints1(indexPairs(:, 1), :);
-matchedPoints2 = validPoints2(indexPairs(:, 2), :);
+[features1Fast,validPoints1Fast] = matching(image1,Fast1);
+[features2Fast,validPoints2Fast] = matching(image2,Fast2);
+indexPairsFast = matchFeatures(features1Fast, features2Fast);
+matchedPoints1Fast = validPoints1Fast(indexPairsFast(:, 1), :);
+matchedPoints2Fast = validPoints2Fast(indexPairsFast(:, 2), :);
 figure;
-showMatchedFeatures(rgb1, rgb2, matchedPoints1, matchedPoints2,'montage');
+showMatchedFeatures(rgb1, rgb2, matchedPoints1Fast, matchedPoints2Fast,'montage');
 
 
-[features1,validPoints1] = matching(image1,Faster1);
-[features2,validPoints2] = matching(image2,Faster2);
-indexPairs = matchFeatures(features1, features2);
-matchedPoints1 = validPoints1(indexPairs(:, 1), :);
-matchedPoints2 = validPoints2(indexPairs(:, 2), :);
+[features1Faster,validPoints1Faster] = matching(image1,Faster1);
+[features2Faster,validPoints2Faster] = matching(image2,Faster2);
+indexPairsFaster = matchFeatures(features1Faster, features2Faster);
+matchedPoints1Faster = validPoints1Faster(indexPairsFaster(:, 1), :);
+matchedPoints2Faster = validPoints2Faster(indexPairsFaster(:, 2), :);
 figure;
-showMatchedFeatures(rgb1, rgb2, matchedPoints1, matchedPoints2,'montage');
+showMatchedFeatures(rgb1, rgb2, matchedPoints1Faster, matchedPoints2Faster,'montage');
 
 
 
 
 imageSize = [targetSize;targetSize];
-tforms2 = estgeotform2d(matchedPoints1, matchedPoints2,'projective', 'confidence', 99, 'MaxNumTrials', 2000);
-tforms2 = invert(tforms2);
-tforms1 = projtform2d;
+tforms2Faster = estgeotform2d(matchedPoints1Faster, matchedPoints2Faster,'projective', 'confidence', 99, 'MaxNumTrials', 2000);
+tforms2Faster = invert(tforms2Faster);
+tforms1Faster = projtform2d;
 
 
-[xlim(1,:), ylim(1,:)] = outputLimits(tforms1, [1 imageSize(1,2)], [1 imageSize(1,1)]);
-[xlim(2,:), ylim(2,:)] = outputLimits(tforms2, [1 imageSize(2,2)], [1 imageSize(2,1)]);
+[xlim(1,:), ylim(1,:)] = outputLimits(tforms1Faster, [1 imageSize(1,2)], [1 imageSize(1,1)]);
+[xlim(2,:), ylim(2,:)] = outputLimits(tforms2Faster, [1 imageSize(2,2)], [1 imageSize(2,1)]);
 maxImageSize = max(imageSize);
 xMin = min([1; xlim(:)]);
 xMax = max([maxImageSize(2); xlim(:)]);
@@ -71,12 +71,12 @@ panoramaView = imref2d([height width], xLimits, yLimits);
 
 
 
-warpedImage1 = imwarp(image1, tforms1, 'OutputView', panoramaView);
-mask1 = imwarp(true(size(image1,1),size(image1,2)), tforms1, 'OutputView', panoramaView);
+warpedImage1 = imwarp(image1, tforms1Faster, 'OutputView', panoramaView);
+mask1 = imwarp(true(size(image1,1),size(image1,2)), tforms1Faster, 'OutputView', panoramaView);
 panorama = step(blender, panorama, warpedImage1, mask1);
 
-warpedImage2 = imwarp(image2, tforms2, 'OutputView', panoramaView);
-mask2 = imwarp(true(size(image2,1),size(image2,2)), tforms2, 'OutputView', panoramaView);
+warpedImage2 = imwarp(image2, tforms2Faster, 'OutputView', panoramaView);
+mask2 = imwarp(true(size(image2,1),size(image2,2)), tforms2Faster, 'OutputView', panoramaView);
 panorama = step(blender, panorama, warpedImage2, mask2);
 
 figure
