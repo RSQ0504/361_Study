@@ -1,6 +1,6 @@
 function mat = Harris(image,fast)
     sobel = [-1 0 1; -2 0 2; -1 0 1];
-    gaus = fspecial("gaussian",5,1);
+    gaus = fspecial("gaussian",5,1.5);
     dog = conv2(gaus,sobel);
 
     ix = imfilter(image,dog);

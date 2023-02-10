@@ -1,7 +1,7 @@
-image1 = imread("IMG_4775.png");
+image1 = imread("2.jpg");
 image1 = rgb2gray(image1);
 image1 =im2double(image1);
-targetSize = [1500 1500];
+targetSize = [750 750];
 r = centerCropWindow2d(size(image1),targetSize);
 image1 = imcrop(image1,r);
 image1 =imresize(image1,[750,750]);
@@ -10,10 +10,10 @@ Faster1 = Harris(image1,Fast1);
 %imshow([Fast1 Faster1]);
 
 
-image2 = imread("IMG_4776.png");
+image2 = imread("1.JPG");
 image2 = rgb2gray(image2);
 image2 =im2double(image2);
-targetSize = [1500 1500];
+targetSize = [750 750];
 r = centerCropWindow2d(size(image2),targetSize);
 image2 = imcrop(image2,r);
 image2 =imresize(image2,[750,750]);
