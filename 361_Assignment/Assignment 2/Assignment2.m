@@ -1,22 +1,24 @@
 clear;
-image1 = imread("2.png");
-image1 = rgb2gray(image1);
+image1 = imread("1.png");
 image1 =im2double(image1);
 targetSize = [1500 1500];
 r = centerCropWindow2d(size(image1),targetSize);
 image1 = imcrop(image1,r);
 image1 =imresize(image1,[750,750]);
+rgb1 = image1;
+image1 = rgb2gray(image1);
 Fast1 = my_fast_detector(image1,0.05);
 Faster1 = Harris(image1,Fast1);
 
 
-image2 = imread("1.png");
-image2 = rgb2gray(image2);
+image2 = imread("2.png");
 image2 =im2double(image2);
 targetSize = [1500 1500];
 r = centerCropWindow2d(size(image2),targetSize);
 image2 = imcrop(image2,r);
 image2 =imresize(image2,[750,750]);
+rgb2 = image2;
+image2 = rgb2gray(image2);
 Fast2 = my_fast_detector(image2,0.05);
 Faster2 = Harris(image2,Fast2);
 
@@ -29,7 +31,7 @@ indexPairs = matchFeatures(features1, features2);
 matchedPoints1 = validPoints1(indexPairs(:, 1), :);
 matchedPoints2 = validPoints2(indexPairs(:, 2), :);
 figure;
-showMatchedFeatures(image1, image2, matchedPoints1, matchedPoints2,'montage');
+showMatchedFeatures(rgb1, rgb2, matchedPoints1, matchedPoints2,'montage');
 
 
 [features1,validPoints1] = matching(image1,Faster1);
@@ -38,7 +40,7 @@ indexPairs = matchFeatures(features1, features2);
 matchedPoints1 = validPoints1(indexPairs(:, 1), :);
 matchedPoints2 = validPoints2(indexPairs(:, 2), :);
 figure;
-showMatchedFeatures(image1, image2, matchedPoints1, matchedPoints2,'montage');
+showMatchedFeatures(rgb1, rgb2, matchedPoints1, matchedPoints2,'montage');
 
 
 
@@ -66,6 +68,8 @@ blender = vision.AlphaBlender('Operation', 'Binary mask', 'MaskSource', 'Input p
 xLimits = [xMin xMax];
 yLimits = [yMin yMax];
 panoramaView = imref2d([height width], xLimits, yLimits);
+
+
 
 warpedImage1 = imwarp(image1, tforms1, 'OutputView', panoramaView);
 mask1 = imwarp(true(size(image1,1),size(image1,2)), tforms1, 'OutputView', panoramaView);
