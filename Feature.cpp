@@ -12,7 +12,7 @@ void createSIFT(Mat image, vector<KeyPoint> &keypoints)
     s->detectAndCompute(image, noArray(), keypoints, descriptors);
 }
 
-void createSIFTDeleteWeak(Mat image,vector<KeyPoint> &keypoints,double threshold){
+void createSIFT(Mat image,vector<KeyPoint> &keypoints,double threshold){
     Ptr<SIFT> s = SIFT::create();
     vector<KeyPoint> tempt;
     s->detect(image, tempt);
@@ -39,7 +39,7 @@ void matchSiftFeatures(Mat image1, Mat image2,
     match.match(descriptors1, descriptors2, matches);
 }
 
-void matchSiftFeaturesDeleteWeak(Mat image1, Mat image2,
+void matchSiftFeatures(Mat image1, Mat image2,
                         vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2,
                         vector<DMatch> &matches,double threshold)
 {
