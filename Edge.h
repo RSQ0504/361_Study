@@ -14,7 +14,7 @@ enum Color{
  * @param size size of kernel
  * @param sigma1 
  * @param sigma2 
- * @param CFormat Color Format of the final result
+ * @param CFormat Color Format of the final result (can use default)
  * @return Mat 
  */
 Mat DoG(Mat src, int size, double sigma1, double sigma2,int CFormat = Other);
@@ -24,7 +24,7 @@ Mat DoG(Mat src, int size, double sigma1, double sigma2,int CFormat = Other);
  * @param src 
  * @param size size of kernel
  * @param sigma 
- * @param CFormat Color Format of the final result
+ * @param CFormat Color Format of the final result (can use default)
  * @return Mat 
  */
 Mat LoG(Mat src, int size, double sigma,int CFormat = Other);
@@ -34,7 +34,7 @@ Mat LoG(Mat src, int size, double sigma,int CFormat = Other);
  * @param src 
  * @param size size of kernel
  * @param sigma 
- * @param CFormat Color Format of the final result
+ * @param CFormat Color Format of the final result (can use default)
  * @return Mat 
  */
 Mat FindEdges(Mat src, int size, double sigma,int CFormat = Other);
@@ -42,7 +42,7 @@ Mat FindEdges(Mat src, int size, double sigma,int CFormat = Other);
  * @brief 
  * 
  * @param src 
- * @param CFormat Color Format of the final result
+ * @param CFormat Color Format of the final result (can use default)
  * @return Mat 
  */
 Mat LaplacianKernel(Mat src,int CFormat = Other);
