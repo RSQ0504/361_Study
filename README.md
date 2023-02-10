@@ -7,4 +7,4 @@ Using MakeFile to Compile and Run, `make main` to Compile the OpenCV C++ file an
 
 ## CMPT 361 Assignment report
 * 361_assignment subdirectory is the homework of my course
-* The report can be find in `361_assignment/Assignment/temple.html`
+* The report can be find in `361_assignment/Assignment/template.html`
