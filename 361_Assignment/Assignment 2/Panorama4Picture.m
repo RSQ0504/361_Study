@@ -1,52 +1,55 @@
-image1 = imread("7.png");
+image1 = imread("./SrcPicture/1.png");
 image1 =im2double(image1);
 targetSize = [1500 1500];
 r = centerCropWindow2d(size(image1),targetSize);
 image1 = imcrop(image1,r);
 image1 =imresize(image1,[750,750]);
 rgb1 = image1;
-
+imwrite(image1,"./ResultPicture/S1-im1.png");
 image1 = rgb2gray(image1);
-Fast1 = my_fast_detector(image1,0.04);
+Fast1 = my_fast_detector(image1,0.05);
 Faster1 = Harris(image1,Fast1);
 
+imwrite(Fast1,"./ResultPicture/S1-fast.png");
+imwrite(Faster1,"./ResultPicture/S1-fastR.png");
 
-image2 = imread("8.png");
+
+image2 = imread("./SrcPicture/2.png");
 image2 =im2double(image2);
 targetSize = [1500 1500];
 r = centerCropWindow2d(size(image2),targetSize);
 image2 = imcrop(image2,r);
 image2 =imresize(image2,[750,750]);
 rgb2 = image2;
-
+imwrite(image2,"./ResultPicture/S1-im2.png");
 image2 = rgb2gray(image2);
-Fast2 = my_fast_detector(image2,0.04);
+Fast2 = my_fast_detector(image2,0.05);
 Faster2 = Harris(image2,Fast2);
 %imshow([Fast1 Faster1; Fast2 Faster2]);
 
 
-image3 = imread("9.png");
+image3 = imread("./SrcPicture/3.png");
 image3 =im2double(image3);
 targetSize = [1500 1500];
 r = centerCropWindow2d(size(image3),targetSize);
 image3 = imcrop(image3,r);
 image3 =imresize(image3,[750,750]);
 rgb3 = image3;
-
+imwrite(image3,"./ResultPicture/S1-im3.png");
 image3 = rgb2gray(image3);
-Fast3 = my_fast_detector(image3,0.04);
+Fast3 = my_fast_detector(image3,0.05);
 Faster3 = Harris(image3,Fast3);
 
-image4 = imread("10.png");
+image4 = imread("./SrcPicture/4.png");
 image4 =im2double(image4);
 targetSize = [1500 1500];
 r = centerCropWindow2d(size(image4),targetSize);
 image4 = imcrop(image4,r);
 image4 =imresize(image4,[750,750]);
 rgb4 = image4;
-
+imwrite(image4,"./ResultPicture/S1-im4.png");
 image4 = rgb2gray(image4);
-Fast4 = my_fast_detector(image4,0.04);
+Fast4 = my_fast_detector(image4,0.05);
 Faster4 = Harris(image4,Fast4);
 imshow([rgb1 rgb2;rgb3 rgb4]);
 
@@ -67,9 +70,9 @@ matchedPoints6Fast = validPoints4Fast(indexPairsFast(:, 2), :);
 %showMatchedFeatures(rgb1, rgb2, matchedPoints1Fast, matchedPoints2Fast,'montage');
 %figure;
 %showMatchedFeatures(rgb2, rgb3, matchedPoints3Fast, matchedPoints4Fast,'montage');
-%figure;
-%showMatchedFeatures(rgb3, rgb4, matchedPoints5Fast, matchedPoints6Fast,'montage');
-
+figure;
+showMatchedFeatures(rgb3, rgb4, matchedPoints5Fast, matchedPoints6Fast,'montage');
+saveas(gcf, './ResultPicture/S1-fastMatch.png');
 
 [features1Faster,validPoints1Faster] = matching(image1,Faster1);
 [features2Faster,validPoints2Faster] = matching(image2,Faster2);
@@ -84,13 +87,13 @@ matchedPoints4Faster = validPoints3Faster(indexPairsFaster(:, 2), :);
 indexPairsFaster = matchFeatures(features3Faster, features4Faster);
 matchedPoints5Faster = validPoints3Faster(indexPairsFaster(:, 1), :);
 matchedPoints6Faster = validPoints4Faster(indexPairsFaster(:, 2), :);
-figure;
-showMatchedFeatures(rgb1, rgb2, matchedPoints1Faster, matchedPoints2Faster,'montage');
-figure;
-showMatchedFeatures(rgb2, rgb3, matchedPoints3Faster, matchedPoints4Faster,'montage');
+%figure;
+%showMatchedFeatures(rgb1, rgb2, matchedPoints1Faster, matchedPoints2Faster,'montage');
+%figure;
+%showMatchedFeatures(rgb2, rgb3, matchedPoints3Faster, matchedPoints4Faster,'montage');
 figure;
 showMatchedFeatures(rgb3, rgb4, matchedPoints5Faster, matchedPoints6Faster,'montage');
-
+saveas(gcf, './ResultPicture/S1-fastRMatch.png');
 
 
 imageSize = [750 750;750 750;750 750;750 750];
@@ -147,3 +150,4 @@ panorama = step(blender, panorama, warpedImage4, mask4);
 
 figure
 imshow(panorama);
+imwrite(panorama,"./ResultPicture/S1-panorama.png");

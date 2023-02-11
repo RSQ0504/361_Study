@@ -13,5 +13,5 @@ function [features1,validPoints1] = matching(image,keypoint)
     
     keypoint1 =[x', y'];
     
-    [features1,validPoints1] = extractFeatures(image, keypoint1,'Method','SURF', 'SURFSize', 64);
+    [features1,validPoints1] = extractFeatures(image, keypoint1,'Method','FREAK');
 end
