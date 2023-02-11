@@ -56,11 +56,13 @@
 <br><br>
 <img src="./ResultPicture/S4-fastRMatch.png" alt="S2-fastRMatch" width="600">
 
-<p> First three sets use 'Freak', and the last one use 'SURF'. These two sets that I chose to show above typically show the difference between two feature decription methods. </p>
+<p> First three sets use 'Freak', and the last one use 'SURF'. These two sets that I chose to show above typically show the difference between two feature decription methods. 
+    'SURF' can match more features but have less accurate. 'Freak' is the opposite of it. 'ORB' is relaticely crude.
+</p>
 <p>I used 'Freak' in the first set above, becasue it is more accurate, which can exclude the noise. 
     If I use the 'SURF' for the first set above, the keypoints on the edge of the elevator will be counted and pointed to the wall and button, which will cause the programe crash and picture torsion.
     I used 'SURF' in the second set above, cuz the keypoints isn't enough so I need to use 'SURF' to match more feature, otherwise the picture cannot be matched and transform becasue the keypoints are not enough.</p>
-<p>For the difference between using FAST and FASTR points, we can match more keypoints in FAST than FASTR for all of four sets</p>
+<p>For the difference between using FAST and FASTR points, we can match more keypoints in FAST than FASTR for all of four sets.</p>
 
 <h4>4: RANSAC and Panoramas</h4>
 <img src="./ResultPicture/S1-panorama.png" alt="S1-panorama" width="600">
