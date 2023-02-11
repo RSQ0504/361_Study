@@ -44,7 +44,10 @@
 <img src="./ResultPicture/S1-fastR.png" alt="S1-fastR" width="300">
 <img src="./ResultPicture/S2-fastR.png" alt="S2-fastR" width="300">
 
-<p>Your comment here</p>
+<p>By comparing your FAST and FASTR visualizations, the noise was discarded after thresholded = 0.001. 
+    For set 1 the noise in the sink was dicarded. For set 2 the noise on the floor and pillar was discarded.
+    The average computation time of FAST is 4s. and the average computation time of FASTR is 4(FAST) + 0.1s(Harris).
+</p>
 
 
 <h4>3: Point description and matching</h4>
@@ -60,8 +63,8 @@
     'SURF' can match more features but have less accurate. 'Freak' is the opposite of it. 'ORB' is relaticely crude.
 </p>
 <p>I used 'Freak' in the first set above, becasue it is more accurate, which can exclude the noise. 
-    If I use the 'SURF' for the first set above, the keypoints on the edge of the elevator will be counted and pointed to the wall and button, which will cause the programe crash and picture torsion.
-    I used 'SURF' in the second set above, cuz the keypoints isn't enough so I need to use 'SURF' to match more feature, otherwise the picture cannot be matched and transform becasue the keypoints are not enough.</p>
+    If I use the 'SURF' for the first set above with ('confidence', 99, 'MaxNumTrials', 2000.), the keypoints on the edge of the elevator will be counted and pointed to the wall and button, which will cause the programe crash and picture torsion.
+    I used 'SURF' in the second set above with ('confidence', 99, 'MaxNumTrials', 2000.), cuz the keypoints isn't enough so I need to use 'SURF' to match more feature, otherwise the picture cannot be matched and transform becasue the keypoints are not enough.</p>
 <p>For the difference between using FAST and FASTR points, we can match more keypoints in FAST than FASTR for all of four sets.</p>
 
 <h4>4: RANSAC and Panoramas</h4>
@@ -73,7 +76,12 @@
 <br><br>
 <img src="./ResultPicture/S4-panorama.png" alt="S4-panorama" width="600">
 
-<p>Your comment here</p>
+<p>Thank to 'Freak'. Both of the optimal RANSAC parameters for FASTR and FAST are 'confidence', 99, 'MaxNumTrials', 2000. They look the same good.
+    At the same time, I find out the Panoramas will be brocken or increditably warped if I lower down the value of 'confidence' during several test.
+    So confidence = 99 is the optimal option for these 4 set.
+    The only difference happened on set 4. 'confidence', 99, 'MaxNumTrials', 2000 works on the FAST with 'Freak' well, however it doesn't work on FASTR due to the shortage of the keypoints.
+    So I change the descriptor to 'SURF'.
+</p>
 
 
 </body> </html>
