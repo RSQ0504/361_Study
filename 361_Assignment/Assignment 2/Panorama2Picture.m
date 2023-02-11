@@ -6,7 +6,7 @@ r = centerCropWindow2d(size(image1),targetSize);
 image1 = imcrop(image1,r);
 image1 =imresize(image1,[750,750]);
 rgb1 = image1;
-imwrite(image1,"./ResultPicture/S2-im1.png");
+%imwrite(image1,"./ResultPicture/S2-im1.png");
 image1 = rgb2gray(image1);
 Fast1 = my_fast_detector(image1,0.05);
 Faster1 = Harris(image1,Fast1);
@@ -19,13 +19,13 @@ r = centerCropWindow2d(size(image2),targetSize);
 image2 = imcrop(image2,r);
 image2 =imresize(image2,[750,750]);
 rgb2 = image2;
-imwrite(image2,"./ResultPicture/S2-im2.png");
+%imwrite(image2,"./ResultPicture/S2-im2.png");
 image2 = rgb2gray(image2);
 Fast2 = my_fast_detector(image2,0.05);
 Faster2 = Harris(image2,Fast2);
 %imshow([Fast1 Faster1; Fast2 Faster2]);
-imwrite(Fast1,"./ResultPicture/S2-fast.png");
-imwrite(Faster1,"./ResultPicture/S2-fastR.png");
+%imwrite(Fast1,"./ResultPicture/S2-fast.png");
+%imwrite(Faster1,"./ResultPicture/S2-fastR.png");
 
 
 [features1Fast,validPoints1Fast] = matching(image1,Fast1);
@@ -35,7 +35,7 @@ matchedPoints1Fast = validPoints1Fast(indexPairsFast(:, 1), :);
 matchedPoints2Fast = validPoints2Fast(indexPairsFast(:, 2), :);
 figure;
 showMatchedFeatures(rgb1, rgb2, matchedPoints1Fast, matchedPoints2Fast,'montage');
-saveas(gcf, './ResultPicture/S2-fastMatch.png');
+%saveas(gcf, './ResultPicture/S2-fastMatch.png');
 
 [features1Faster,validPoints1Faster] = matching(image1,Faster1);
 [features2Faster,validPoints2Faster] = matching(image2,Faster2);
@@ -44,7 +44,7 @@ matchedPoints1Faster = validPoints1Faster(indexPairsFaster(:, 1), :);
 matchedPoints2Faster = validPoints2Faster(indexPairsFaster(:, 2), :);
 figure;
 showMatchedFeatures(rgb1, rgb2, matchedPoints1Faster, matchedPoints2Faster,'montage');
-saveas(gcf,'./ResultPicture/S2-fastRMatch.png');
+%saveas(gcf,'./ResultPicture/S2-fastRMatch.png');
 
 
 
@@ -83,4 +83,4 @@ panorama = step(blender, panorama, warpedImage2, mask2);
 
 figure
 imshow(panorama);
-imwrite(panorama,"./ResultPicture/S2-panorama.png");
+%imwrite(panorama,"./ResultPicture/S2-panorama.png");
