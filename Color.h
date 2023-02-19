@@ -31,3 +31,5 @@ Mat showchannel_3C(Mat src,int color);
  * @return Mat 
  */
 Mat getalpha(Mat src);
+
+void morphological();
