@@ -108,6 +108,17 @@ vector<KeyPoint> HarrisCornerDetector(Mat src,Mat &out,int size, float t)
     return keypoints;
 }
 
+vector<KeyPoint> FAST(Mat image,Mat &out, int threshold){
+    if (image.channels()!=1)
+        cvtColor(image, image, COLOR_BGR2GRAY);
+    bool nonmaxSuppression = true;
+    Ptr<FastFeatureDetector> fast = FastFeatureDetector::create(threshold, nonmaxSuppression);
+    vector<KeyPoint> keypoints;
+    fast->detect(image, keypoints);
+    drawKeypoints(image, keypoints, out);
+    return keypoints;
+}
+
 vector<DMatch> MatchUsingSIFT(Mat image1, Mat image2, Mat &out, vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2){
     Mat descriptors1, descriptors2;
     Ptr<SIFT> sift = SIFT::create();

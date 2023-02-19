@@ -55,6 +55,8 @@ void matchSiftFeatures(Mat image1, Mat image2,
  */
 vector<KeyPoint> HarrisCornerDetector(Mat image,Mat &out,int size, float t);
 
+vector<KeyPoint> FAST(Mat image,Mat &out, int threshold);
+
 vector<DMatch> MatchUsingSIFT(Mat image1, Mat image2,Mat &out, vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2);
 
 vector<DMatch> MatchUsingFREAK(Mat image1, Mat image2,Mat &out, vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2);
