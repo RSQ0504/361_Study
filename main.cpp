@@ -57,7 +57,10 @@ int main(){
     image=HarrisCornerDetector(out1,out2,30,100);
     imshow("Display Image", out2);
     */
-    morphological();
+    Mat image;
+    image = imread("./Picture/LP.png");
+    Mat result = FFT(image);
+    showFFT(result,0.2);
     waitKey(0);
     return 0;
 }

@@ -33,3 +33,7 @@ Mat showchannel_3C(Mat src,int color);
 Mat getalpha(Mat src);
 
 void morphological();
+
+Mat FFT(Mat image);
+
+void showFFT(const Mat& result,double scale);
