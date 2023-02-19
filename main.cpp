@@ -51,16 +51,25 @@ int main(){
     image = image * 100;
     imshow("Display Image", image);
     */
-    /*
-    Mat image,out1,out2;
-    out1 = imread("./Picture/HsBoy.png");
-    image=HarrisCornerDetector(out1,out2,30,100);
+    
+    Mat image1,image2,out1,out2,match;
+    image1 = imread("./Picture/S2-im1.png");
+    vector<KeyPoint> k1 =HarrisCornerDetector(image1,out1,10,0.5);
+    imshow("Display Image", out1);
+    image2 = imread("./Picture/S2-im2.png");
+    vector<KeyPoint> k2 =HarrisCornerDetector(image2,out2,10,0.5);
     imshow("Display Image", out2);
-    */
+    vector<DMatch> m;
+    m = MatchUsingFREAK(image1,image2,match,k1,k2);
+    imshow("SIFT Matches", match);
+
+
+   /*
     Mat image;
     image = imread("./Picture/LP.png");
     Mat result = FFT(image);
     showFFT(result,0.2);
+    */
     waitKey(0);
     return 0;
 }

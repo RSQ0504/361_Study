@@ -5,6 +5,18 @@
 using namespace cv;
 using namespace std;
 
+vector<KeyPoint> Mat2Keypoint(Mat corners){
+    vector<KeyPoint> keypoints;
+        for (int i = 0; i < corners.rows; i++) {
+            for (int j = 0; j < corners.cols; j++) {
+                if (corners.at<uchar>(i, j) > 0) {
+                    keypoints.push_back(KeyPoint(j, i, 1));
+                }
+            }
+        }
+    return keypoints;
+}
+
 void createSIFT(Mat image, vector<KeyPoint> &keypoints)
 {
     Ptr<SIFT> s = SIFT::create();
@@ -70,31 +82,57 @@ void matchSiftFeatures(Mat image1, Mat image2,
     match.match(descriptors1, descriptors2, matches);
 }
 
-Mat HarrisCornerDetector(Mat src,Mat &out,int size, int threshold)
+vector<KeyPoint> HarrisCornerDetector(Mat src,Mat &out,int size, float t)
 {
     Mat image = src;
     if (image.channels()!=1)
         cvtColor(image, image, COLOR_BGR2GRAY);
+    
+    Mat corners;
+    cornerHarris(image, corners, size, 5, 0.05);
 
-    out = src;
-    if (out.channels()!=1)
-        cvtColor(out, out, COLOR_BGR2GRAY);
-
-    Mat dst_norm;
-    cornerHarris(image, image, size, 5, 0.05, BORDER_DEFAULT);
-    normalize(image, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
-
-
-    for(int i = 0; i < dst_norm.rows; i++)
+    Mat k = Mat::zeros(corners.size(), CV_8UC1);
+    for( int i = 0; i < corners.rows ; i++ )
     {
-        for(int j = 0; j < dst_norm.cols; j++)
+        for( int j = 0; j < corners.cols; j++ )
         {
-            if((int) dst_norm.at<float>(i,j) > threshold)
+            if(corners.at<float>(i,j) > t )
             {
-                circle(image, Point(j,i), 10,  Scalar(10));
-                circle(out, Point(j,i), 10,  Scalar(10));
+                k.at<uchar>(i,j) = 255;
             }
         }
     }
-    return image;
+
+    vector<KeyPoint> keypoints = Mat2Keypoint(k);
+    drawKeypoints(image, keypoints, out);
+    return keypoints;
+}
+
+vector<DMatch> MatchUsingSIFT(Mat image1, Mat image2, Mat &out, vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2){
+    Mat descriptors1, descriptors2;
+    Ptr<SIFT> sift = SIFT::create();
+    sift->compute(image1, keypoints1, descriptors1);
+    sift->compute(image2, keypoints2, descriptors2);
+
+    BFMatcher matcher(NORM_L2);
+    vector<DMatch> matches;
+    matcher.match(descriptors1, descriptors2, matches);
+
+    drawMatches(image1, keypoints1, image2, keypoints2, matches, out);
+
+    return matches;
+}
+
+vector<DMatch> MatchUsingFREAK(Mat image1, Mat image2,Mat &out, vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2){
+    Ptr<xfeatures2d::FREAK> freak = xfeatures2d::FREAK::create();
+    Mat descriptors1, descriptors2;
+    freak->compute(image1, keypoints1, descriptors1);
+    freak->compute(image2, keypoints2, descriptors2);
+
+    BFMatcher matcher(NORM_HAMMING);
+    vector<DMatch> matches;
+    matcher.match(descriptors1, descriptors2, matches);
+
+    drawMatches(image1, keypoints1, image2, keypoints2, matches, out);
+    return matches;
 }
