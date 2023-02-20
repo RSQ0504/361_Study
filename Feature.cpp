@@ -148,6 +148,20 @@ vector<DMatch> MatchUsingFREAK(Mat image1, Mat image2,Mat &out, vector<KeyPoint>
     return matches;
 }
 
+vector<DMatch> MatchUsingSURF(Mat image1, Mat image2,Mat &out, vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2){
+    Ptr<xfeatures2d::SURF> surf = xfeatures2d::SURF::create();
+    Mat descriptors1, descriptors2;
+    surf->compute(image1, keypoints1, descriptors1);
+    surf->compute(image2, keypoints2, descriptors2);
+
+    BFMatcher matcher(NORM_HAMMING);
+    vector<DMatch> matches;
+    matcher.match(descriptors1, descriptors2, matches);
+
+    drawMatches(image1, keypoints1, image2, keypoints2, matches, out);
+    return matches;    
+}
+
 
 Mat PanoramicImageStitching(Mat* image,int size){
     Mat out;

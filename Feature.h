@@ -85,6 +85,19 @@ vector<DMatch> MatchUsingSIFT(Mat image1, Mat image2,Mat &out, vector<KeyPoint> 
  * @return vector<DMatch> 
  */
 vector<DMatch> MatchUsingFREAK(Mat image1, Mat image2,Mat &out, vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2);
+
+/**
+ * @brief 
+ * 
+ * @param image1 
+ * @param image2 
+ * @param out 
+ * @param keypoints1 
+ * @param keypoints2 
+ * @return vector<DMatch> 
+ */
+vector<DMatch> MatchUsingSURF(Mat image1, Mat image2,Mat &out, vector<KeyPoint> &keypoints1,vector<KeyPoint> &keypoints2);
+
 /**
  * @brief 
  * 
@@ -92,5 +105,11 @@ vector<DMatch> MatchUsingFREAK(Mat image1, Mat image2,Mat &out, vector<KeyPoint>
  * @return vector<KeyPoint> 
  */
 vector<KeyPoint> Mat2Keypoint(Mat corner);
-
+/**
+ * @brief 
+ * 
+ * @param image 
+ * @param size 
+ * @return Mat 
+ */
 Mat PanoramicImageStitching(Mat* image,int size);
