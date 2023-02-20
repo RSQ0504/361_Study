@@ -108,7 +108,7 @@ vector<KeyPoint> HarrisCornerDetector(Mat src,Mat &out,int size, float t)
     return keypoints;
 }
 
-vector<KeyPoint> FAST(Mat image,Mat &out, int threshold){
+vector<KeyPoint> FASTCorner(Mat image,Mat &out, int threshold){
     if (image.channels()!=1)
         cvtColor(image, image, COLOR_BGR2GRAY);
     bool nonmaxSuppression = true;

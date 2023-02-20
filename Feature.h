@@ -62,7 +62,7 @@ vector<KeyPoint> HarrisCornerDetector(Mat image,Mat &out,int size, float t);
  * @param threshold 
  * @return vector<KeyPoint> 
  */
-vector<KeyPoint> FAST(Mat image,Mat &out, int threshold);
+vector<KeyPoint> FASTCorner(Mat image,Mat &out, int threshold);
 /**
  * @brief 
  * 
