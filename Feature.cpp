@@ -147,3 +147,38 @@ vector<DMatch> MatchUsingFREAK(Mat image1, Mat image2,Mat &out, vector<KeyPoint>
     drawMatches(image1, keypoints1, image2, keypoints2, matches, out);
     return matches;
 }
+
+
+Mat PanoramicImageStitching(Mat* image,int size){
+    Mat out;
+    vector<KeyPoint> *k = new vector<KeyPoint>[size];
+    vector<DMatch> *m = new vector<DMatch>[size-1];
+    Mat *homography = new Mat[size-1];
+    for(int i = 0;i<size;i++){
+        k[i] = FASTCorner(image[i],out,100);
+    }
+    for(int i = 0;i<size-1;i++){
+        m[i] = MatchUsingFREAK(image[i],image[i+1],out,k[i],k[i+1]);
+    }
+    
+    vector<Point2f> points1, points2;
+    for (int i =0;i<size-1;i++){
+        for (int j=0;j<m[i].size();j++){
+            points1.push_back(k[i][m[i][j].queryIdx].pt);
+            points2.push_back(k[i+1][m[i][j].trainIdx].pt);
+        }
+        homography[i] = findHomography(points2, points1, RANSAC);
+    }
+    
+    // Warp input images using homography matrix
+    Mat result;
+    warpPerspective(image[1], result, homography[0], Size(image[0].cols + image[1].cols, image[0].rows));
+    Mat half(result, Rect(0, 0, image[0].cols, image[0].rows));
+    image[0].copyTo(half);
+
+    delete[] k;
+    delete[] m;
+    delete[] homography;
+
+    return result;
+}

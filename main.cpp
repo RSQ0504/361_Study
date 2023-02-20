@@ -70,45 +70,15 @@ int main(){
     Mat result = FFT(image);
     showFFT(result,0.2);
     */
-    Mat image1, image2,image3,image4,out;
-    image1 = imread("./Picture/S2-im1.png");
-    image2 = imread("./Picture/S2-im2.png");
-    image3 = imread("./Picture/S2-im3.png");
-    image4 = imread("./Picture/S2-im4.png");
-    vector<KeyPoint> k1 =FASTCorner(image1,out,150);
-    vector<KeyPoint> k2 =FASTCorner(image2,out,150);
-    vector<KeyPoint> k3 =FASTCorner(image3,out,150);
-    vector<KeyPoint> k4 =FASTCorner(image4,out,150);
-    vector<DMatch> m12 = MatchUsingFREAK(image1,image2,out,k1,k2);
-    vector<DMatch> m23 = MatchUsingFREAK(image2,image3,out,k2,k3);
-    vector<DMatch> m34 = MatchUsingFREAK(image1,image2,out,k3,k4);
-    vector<Point2f> points1, points2, points3, points4;
-    for (int i = 0; i < m12.size(); i++)
-    {
-        points1.push_back(k1[m12[i].queryIdx].pt);
-        points2.push_back(k2[m12[i].trainIdx].pt);
-    }
-    for (int i = 0; i < m23.size(); i++)
-    {
-        points2.push_back(k2[m23[i].queryIdx].pt);
-        points3.push_back(k3[m23[i].trainIdx].pt);
-    }
-    for (int i = 0; i < m34.size(); i++)
-    {
-        points3.push_back(k3[m34[i].queryIdx].pt);
-        points4.push_back(k4[m34[i].trainIdx].pt);
-    }
-    Mat homography12 = findHomography(points2, points1, RANSAC);
-    Mat homography23 = findHomography(points3, points2, RANSAC);
-    Mat homography34 = findHomography(points4, points3, RANSAC);
-
-    // Warp input images using homography matrix
+   /**/
+    Mat *image = new Mat[4];
     Mat result;
-    warpPerspective(image1, result, Mat::eye(3, 3, CV_32F), Size(image1.cols, image1.rows));
-    warpPerspective(image2, result, homography12, Size(result.cols, result.rows), INTER_LINEAR, BORDER_CONSTANT);
-    warpPerspective(image3, result, homography23 * homography12, Size(result.cols, result.rows), INTER_LINEAR, BORDER_CONSTANT);
-    warpPerspective(image4, result, homography34 * homography23 * homography12, Size(result.cols, result.rows), INTER_LINEAR, BORDER_CONSTANT);
-
+    image[0] = imread("./Picture/S2-im1.png");
+    image[1] = imread("./Picture/S2-im2.png");
+    image[2] = imread("./Picture/S2-im3.png");
+    image[3] = imread("./Picture/S2-im4.png");
+    result=PanoramicImageStitching(image,4);
+    //only can stitch 2 image right now
     imshow("check", result);
     waitKey(0);
     return 0;

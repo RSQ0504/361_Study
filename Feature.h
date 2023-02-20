@@ -92,3 +92,5 @@ vector<DMatch> MatchUsingFREAK(Mat image1, Mat image2,Mat &out, vector<KeyPoint>
  * @return vector<KeyPoint> 
  */
 vector<KeyPoint> Mat2Keypoint(Mat corner);
+
+Mat PanoramicImageStitching(Mat* image,int size);
