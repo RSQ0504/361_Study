@@ -33,19 +33,19 @@ Mat showchannel_3C(Mat src,int color);
 Mat getalpha(Mat src);
 /**
  * @brief 
- * 
+ * Appy dilation erosion opening closing.
  */
 void morphological();
 /**
  * @brief 
- * 
+ * Create FFT of image without shift (2 channel)
  * @param image 
  * @return Mat 
  */
 Mat FFT(Mat image);
 /**
  * @brief 
- * 
+ * fftshift and show the frequency domain
  * @param result 
  * @param scale 
  */

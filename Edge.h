@@ -9,7 +9,7 @@ enum Color{
 };
 /**
  * @brief 
- * 
+ *  Differentiation of Gaussian (find edge)(G_1-G_2)
  * @param src 
  * @param size size of kernel
  * @param sigma1 
@@ -20,7 +20,7 @@ enum Color{
 Mat DoG(Mat src, int size, double sigma1, double sigma2,int CFormat = Other);
 /**
  * @brief 
- * 
+ *  Laplacian of Gaussian (find edge)
  * @param src 
  * @param size size of kernel
  * @param sigma 
@@ -30,7 +30,7 @@ Mat DoG(Mat src, int size, double sigma1, double sigma2,int CFormat = Other);
 Mat LoG(Mat src, int size, double sigma,int CFormat = Other);
 /**
  * @brief 
- * 
+ *  using Sobel kernel to find edge (using Gaussian first to reduce noise)
  * @param src 
  * @param size size of kernel
  * @param sigma 
@@ -40,7 +40,7 @@ Mat LoG(Mat src, int size, double sigma,int CFormat = Other);
 Mat FindEdges(Mat src, int size, double sigma,int CFormat = Other);
 /**
  * @brief 
- * 
+ * Using kernel which is simliar as Lapacian to find edge
  * @param src 
  * @param CFormat Color Format of the final result (can use default)
  * @return Mat 
