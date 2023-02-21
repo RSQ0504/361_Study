@@ -112,4 +112,6 @@ vector<KeyPoint> Mat2Keypoint(Mat corner);
  * @param size the length of the array of pictures
  * @return Mat 
  */
-Mat PanoramicImageStitching(Mat* image,int size);
+Mat MyPanoramicImageStitching(Mat* image,int size);
+
+Mat UsingApiToCreatePanoramic(Mat *image,int size);

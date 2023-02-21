@@ -77,8 +77,9 @@ int main(){
     image[1] = imread("./Picture/S2-im2.png");
     image[2] = imread("./Picture/S2-im3.png");
     image[3] = imread("./Picture/S2-im4.png");
-    result=PanoramicImageStitching(image,4);
+    result=MyPanoramicImageStitching(image,4);
     //only can stitch 2 image right now
+    //result=UsingApiToCreatePanoramic(image,4);
     imshow("check", result);
     waitKey(0);
     return 0;

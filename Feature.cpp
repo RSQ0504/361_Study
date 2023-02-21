@@ -163,7 +163,7 @@ vector<DMatch> MatchUsingSURF(Mat image1, Mat image2,Mat &out, vector<KeyPoint> 
 }
 
 
-Mat PanoramicImageStitching(Mat* image,int size){
+Mat MyPanoramicImageStitching(Mat* image,int size){
     Mat out;
     vector<KeyPoint> *k = new vector<KeyPoint>[size];
     vector<DMatch> *m = new vector<DMatch>[size-1];
@@ -195,4 +195,19 @@ Mat PanoramicImageStitching(Mat* image,int size){
     delete[] homography;
 
     return result;
+}
+
+Mat UsingApiToCreatePanoramic(Mat *image,int size){
+    vector<Mat> images;
+    for(int i=0;i<size;i++){
+        images.push_back(image[i]);
+    }
+    Ptr<Stitcher> stitcher = Stitcher::create();
+    Mat panorama;
+    Stitcher::Status status = stitcher->stitch(images, panorama);
+    if (status != Stitcher::OK)
+    {
+        std::cout<<"stitcher failed"<<endl;
+    }
+    return panorama;
 }
