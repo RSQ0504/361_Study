@@ -77,6 +77,8 @@ int main(){
     image[1] = imread("./Picture/S2-im2.png");
     image[2] = imread("./Picture/S2-im3.png");
     image[3] = imread("./Picture/S2-im4.png");
+    //vector<KeyPoint> k1;
+    //k1=HarrisCornerDetector(image[0],result,30,0.1);
     result=MyPanoramicImageStitching(image,4);
     //only can stitch 2 image right now
     //result=UsingApiToCreatePanoramic(image,4);
