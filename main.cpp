@@ -82,5 +82,6 @@ int main(){
     //result=UsingApiToCreatePanoramic(image,4);
     imshow("check", result);
     waitKey(0);
+    delete[] image;
     return 0;
 }
